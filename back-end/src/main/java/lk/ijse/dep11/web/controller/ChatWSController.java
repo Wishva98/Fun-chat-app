@@ -6,6 +6,7 @@ import lk.ijse.dep11.web.to.MessageTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -20,6 +21,7 @@ import java.util.Vector;
 public class ChatWSController extends TextWebSocketHandler {
 
     private final List<WebSocketSession> webSocketSessionList = new Vector<>();
+
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -40,6 +42,7 @@ public class ChatWSController extends TextWebSocketHandler {
                 for (WebSocketSession webSocketSession : webSocketSessionList) {
                     if (webSocketSession.equals(session)) continue;
                     if (webSocketSession.isOpen()){
+                        webSocketSession.sendMessage(new TextMessage(objectMapper.writeValueAsString(recievedMessage)));
                         webSocketSession.sendMessage(new TextMessage(objectMapper.writeValueAsString(recievedMessage)));
                     }
                 }
