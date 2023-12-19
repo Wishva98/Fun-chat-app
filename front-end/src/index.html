@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun-Chat</title>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
+    <script type="module" src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="module" src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Agbalumo&family=Inter:wght@300;400;500;600&family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&family=Oswald:wght@200;400;500;700&family=Playpen+Sans:wght@100;200;300;400&family=Poppins:ital,wght@0,200;0,500;0,600;1,200;1,300;1,500&family=Raleway:ital,wght@0,200;0,300;0,500;0,600;1,100;1,500&family=Roboto+Mono:ital,wght@0,400;1,200;1,300;1,400&family=Roboto:ital,wght@0,300;1,100;1,300&family=Teko:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/main.js"></script>
+</head>
+<body class="vh-100 d-flex flex-column overflow-y-auto  container-md">
+    <header class="text-center border-bottom py-2 my-2 bg-primary d-flex justify-content-around">
+        <h1><img class="rounded img-fluid mx-3" src="image/chat-logo.png" alt="logo"> Fun Chat</h1>
+        <div id="logged-user" class="">
+            <div class="">
+                
+            </div>
+        </div>
+    </header>
+    <main id="chat-body" class="flex-grow-1">
+        <div class="d-flex justify-content-between mx-3">
+            <div id="header">
+                <button id="btn-members" class="btn btn-outline-success mb-2"><i class="bi bi-list fs-2"></i></button>
+                <aside id="members" class="position-fixed d-none">
+                    <nav class="d-n">
+                        <ul class="list-group">
+                            <li class="user list-group-item d-flex align-items-center gap-3">
+                                <div class="user-pic"></div>Person 1
+                            </li>
+                            <li class="user list-group-item d-flex align-items-center gap-3"><div class="user-pic"></div>Person 2</li>
+                            <li class="user list-group-item d-flex align-items-center gap-3"><div class="user-pic"></div>Person 3</li>   
+                        </ul>
+                    </nav>
+                </aside>
+            </div>
+            <div>
+                <h3>Message Header</h3>
+            </div>
+        </div>
+        <div id="user-layout" class="position-relative">
+            <div id="output-wrapper" class="border rounded overflow-y-auto mb-1">
+<!--                <div class="msg-body d-flex mx-3 my-2">-->
+<!--                    <div class="message other border rounded-3">This is message</div>-->
+<!--                </div>-->
+<!--                <div class="msg-body d-flex mx-3 my-2 justify-content-end">-->
+
+<!--                    <div class="message me border rounded-3">This is messagekjsd jsdah dsjanh sjakn sdja dsakj sdjkan dsakjn</div>-->
+<!--                </div>-->
+            </div>
+            <form action="javascript:void(0)" id="txt-message" class="d-flex gap-3 mt-1 ">
+                <input id="text" type="text" class="form-control" placeholder="Message here">
+                <button id="send" class="btn btn-primary d-flex gap-2">Send <i class="bi bi-send"></i></button>
+            </form>
+        </div>
+    </main>
+    <div id="signinLayout" class="d-none position-absolute vw-100 vh-100 d-flex flex-column bg-white justify-content-center
+    align-items-center">
+        
+            <h2>Welcome to Fun chat</h2>
+            <button id="sign-in" class="btn btn-primary">sign In</button>
+    </div>
+    <footer class="text-center border-top mt-2">
+        <span>Copyrights &copy; 2023 Wishvanath Adhikari Allrights Reserved</span>
+    </footer>
+</body>
+</html>
