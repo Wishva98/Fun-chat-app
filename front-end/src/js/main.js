@@ -1,16 +1,14 @@
 import $ from 'jquery';
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import {auth} from "../firebase";
-import process from "../../dist/index.18dbc454";
 
 
 const btnMemberselm = ('#members');
-const { API_BASE_URL } = process.env;
-// alert(API_BASE_URL)
+const { API_BASE_URL } = process.env
+let ws = null;
 
 let flag = true;
 $('#btn-members').on('click',()=>{
-    // alert("okay");
     
     if($('#members').hasClass('d-none')){
         $('#btn-members').removeClass('btn-outline-success');
@@ -21,7 +19,6 @@ $('#btn-members').on('click',()=>{
         $('#btn-members').addClass('btn-outline-success');
         $('#members').addClass('d-none');
     }
-
 })
 function show(){
     this.flag = !this.flag;
@@ -54,6 +51,10 @@ onAuthStateChanged(auth,(loggedUser)=>{
         $('#signinLayout').addClass('d-none');
         $('main').removeClass('d-none');
         $('#logged-user').css("background-image", "url(" + user.picture + ")");
+        if (!ws){
+            ws = new WebSocket(API_BASE_URL);
+            ws.addEventListener('message',loadMessage);
+        }
         
     }else{
         user.name = null;
@@ -61,20 +62,26 @@ onAuthStateChanged(auth,(loggedUser)=>{
         user.picture = null;
         $('#signinLayout').removeClass('d-none');
         $('main').addClass('d-none');
+        if (ws){
+            ws.close();
+            ws=null;
+        }
     }
 })
+
 const textElm = $('#text');
 const btnSendElm = $('#send');
 btnSendElm.on('click',()=>{
     const message = textElm.val();
-    console.log(user.email,message)
     const msgObj = {
         email:user.email,
         message
     }
-    displayMessage(msgObj)
-    // alert(textElm.val())
-})
+    ws.send(JSON.stringify(msgObj));
+    displayMessage(msgObj);
+    textElm.val("");
+    textElm.focus();
+});
 
 function displayMessage({email,message}){
     const divElement = document.createElement('div');
@@ -83,14 +90,19 @@ function displayMessage({email,message}){
         divElement.innerHTML = `
                                 <div class="message me p-3 border rounded-3">${message}</div>
                                 `;
-        $('#output-wrapper').append(divElement);
+        // $('#output-wrapper').append(divElement);
     }else {
         divElement.classList.add('msg-body', 'd-flex', 'mx-3','my-2');
         divElement.innerHTML = `
                                 <div class="message other p-3 border rounded-3">${message}</div>
                                 `;
-        $('#output-wrapper').append(divElement);
-    }
 
+    }
+    $('#output-wrapper').append(divElement);
+
+}
+
+function loadMessage(e){
+    displayMessage(JSON.parse(e.data));
 }
 
