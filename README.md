@@ -10,7 +10,10 @@ Experience the future of communication with ChatHub Connect – where innovation
 
 
 ## VERSION
-0.1.0
+0.3.0
+
+## Screenshots
+![screenshot](ss-1.jpeg)
 
 ### License
 Copyrights &copy; 2023 Wishvanath Adhikari All rights Reserved</br>
