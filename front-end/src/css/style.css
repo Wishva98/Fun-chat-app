@@ -44,7 +44,6 @@ header img{
 
 #output-wrapper{
     height: 92%;
-    /* background-color: blueviolet; */
 }
 
 .msg-body{
@@ -70,8 +69,9 @@ header img{
     border-bottom: 8px solid transparent;
     left: -7px;
 }
-.me{
+.message.me{
     background-color: rgba(65, 208, 243, 0.75);
+    align-self: flex-end;
 }
 
 .message.me:after{

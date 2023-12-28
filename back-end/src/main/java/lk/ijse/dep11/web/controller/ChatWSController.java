@@ -43,7 +43,6 @@ public class ChatWSController extends TextWebSocketHandler {
                     if (webSocketSession.equals(session)) continue;
                     if (webSocketSession.isOpen()){
                         webSocketSession.sendMessage(new TextMessage(objectMapper.writeValueAsString(recievedMessage)));
-                        webSocketSession.sendMessage(new TextMessage(objectMapper.writeValueAsString(recievedMessage)));
                     }
                 }
             }else {
